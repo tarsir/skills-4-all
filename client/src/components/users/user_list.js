@@ -1,14 +1,22 @@
 import React from 'react';
 import { Switch, Route, Link} from 'react-router-dom';
 
+import UserPage from './user_page';
+
 import { getUsers } from '../../api/user_api';
 import '../../assets/lists.css';
+
+function UserListHeader(props) {
+    return (
+        <h2><Link to="/users">User Listing</Link></h2>
+    );
+}
 
 function UserListItem(props) {
     console.log(props);
     return (
         <li className="user-list-item">
-            <Link to={{ pathname: '/users/' + props.user.id }}>{props.user.first_name}</Link>
+            <Link to={{ pathname: '/users/' + props.user.id }}>{props.user.first_name} {props.user.last_name}</Link>
         </li>
     );
 }
@@ -42,11 +50,14 @@ class UserList extends React.Component {
 }
 
 export default class Users extends React.Component {
-
     render() {
         return (
             <div>
-                <UserList />
+                <UserListHeader />
+                <Switch>
+                    <Route exact path="/users" component={UserList} />
+                    <Route path="/users/:id" component={UserPage} />
+                </Switch>
             </div>
         );
     }
