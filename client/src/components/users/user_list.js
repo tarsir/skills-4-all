@@ -8,7 +8,7 @@ import '../../assets/lists.css';
 
 function UserListHeader(props) {
     return (
-        <h2>User Listing</h2>
+        <h2><Link to="/users">User Listing</Link></h2>
     );
 }
 
@@ -16,7 +16,7 @@ function UserListItem(props) {
     console.log(props);
     return (
         <li className="user-list-item">
-            <Link to={{ pathname: '/users/' + props.user.id }}>{props.user.first_name}</Link>
+            <Link to={{ pathname: '/users/' + props.user.id }}>{props.user.first_name} {props.user.last_name}</Link>
         </li>
     );
 }

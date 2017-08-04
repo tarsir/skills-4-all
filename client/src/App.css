@@ -28,4 +28,18 @@
 .container {
   max-width: 1080px;
   margin: 0 auto;
+  font-size: 22px;
+}
+
+/* links */
+a{
+  padding: 3px;
+  border-radius: 3px;
+}
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #d9d9d9;
 }
