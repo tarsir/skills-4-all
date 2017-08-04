@@ -19,7 +19,7 @@ class Header extends Component {
 class Main extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/users' component={Users} />

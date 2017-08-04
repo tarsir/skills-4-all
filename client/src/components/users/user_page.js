@@ -9,7 +9,7 @@ function UserInfo(props) {
     return (
         <div className="user-info">
             <h2>{props.user.first_name} {props.user.last_name}</h2>
-            <h4>{props.user.email}</h4>
+            <h4>Email: {props.user.email}</h4>
         </div>
     )
 }
