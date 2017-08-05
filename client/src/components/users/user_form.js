@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Switch, Route, Redirect} from 'react-router-dom';
 
-import { getUserById, addNewUser } from '../../api/user_api';
+import { getUserById, updateUser, addNewUser } from '../../api/user_api';
 import { FormPassword, FormInput } from '../form/inputs';
 
 class UserForm extends React.Component {
@@ -15,7 +15,7 @@ class UserForm extends React.Component {
             email : "",
             password : "",
             password_confirmation : "",
-            headerText: "New User"
+            isNewUser: true
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,7 +57,7 @@ class UserForm extends React.Component {
                         firstName: userData.first_name,
                         lastName: userData.last_name,
                         email: userData.email,
-                        headerText: "Edit User"
+                        isNewUser: false
                     });
                 });
         }
@@ -65,24 +65,44 @@ class UserForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        addNewUser({
+        let apiCall = addNewUser({
             first_name: this.state.firstName,
             last_name: this.state.lastName,
             email: this.state.email,
             password: this.state.password,
             password_confirmation: this.state.password_confirmation,
-        })
+        });
+        if (!this.state.isNewUser) {
+            apiCall = updateUser(
+                this.props.userId, 
+                {
+                    first_name: this.state.firstName || undefined,
+                    last_name: this.state.lastName || undefined,
+                    email: this.state.email || undefined,
+                    password: this.state.password || undefined,
+                    password_confirmation: this.state.password_confirmation || undefined,
+                }
+            );
+        }
+
+        apiCall
             .then((response) => {
                 return response.json();
             }).then((respJson) => {
                 console.log(respJson);
+                this.props.successHandler();
             });
     }
 
     render() {
+        let headerText = "New User";
+        if (!this.state.isNewUser) {
+            headerText = "Edit User";
+        }
+
         return (
             <form className="user-edit-form" onSubmit={this.handleSubmit}>
-                <h2>{this.state.headerText}</h2>
+                <h2>{headerText}</h2>
                 <FormInput labelText="First name" value={this.state.firstName} changeHandler={this.handleFNameChange} />
                 <FormInput labelText="Last name" value={this.state.lastName} changeHandler={this.handleLNameChange} />
                 <FormInput labelText="Email address" value={this.state.email} changeHandler={this.handleEmailChange} />
@@ -122,13 +142,12 @@ export default class UserFormWrapper extends React.Component {
         if (this.props.match) {
             userId = this.props.match.params.id;
         }
-        console.log(redirect);
 
         return (
             <Switch>
                 {redirect}
                 <Route path='*' render={(props) => {
-                    return <UserForm userId={userId} />;
+                    return <UserForm userId={userId} successHandler={this.redirectToUserList} />;
                 }} />
             </Switch>
         )

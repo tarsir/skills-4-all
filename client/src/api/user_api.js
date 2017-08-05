@@ -6,6 +6,24 @@ function getUserById(userId) {
     return window.fetch('/users/' + userId);
 }
 
+function updateUser(userId, userData) {
+    let headers = new Headers();
+
+    headers.append('Content-Type','application/json');
+
+    let config = {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify({
+            user: userData
+        })
+    };
+
+    let req = new Request('/users/' + userId, config);
+
+    return window.fetch(req);
+}
+
 function addNewUser(userData) {
     let headers = new Headers();
 
@@ -47,5 +65,6 @@ export {
     getUsers,
     getUserById,
     login,
+    updateUser,
     addNewUser
 };
