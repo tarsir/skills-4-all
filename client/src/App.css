@@ -31,6 +31,11 @@
   font-size: 22px;
 }
 
+/* lists */
+ul {
+  list-style: none;
+}
+
 /* links */
 a{
   padding: 3px;
