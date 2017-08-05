@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route, Link} from 'react-router-dom';
 
 import UserPage from './user_page';
-import UserForm from './user_form';
+import UserFormWrapper from './user_form';
 
 import { getUsers } from '../../api/user_api';
 import '../../assets/lists.css';
@@ -73,10 +73,10 @@ export default class Users extends React.Component {
                 <Switch>
                     <Route exact path="/users" component={UserList} />
                     <Route path="/users/new" render={(props) => {
-                        return <UserForm />;
+                        return <UserFormWrapper />;
                     }} />
                     <Route path="/users/edit/:id" render={(props) => {
-                        return <UserForm {...props} />;
+                        return <UserFormWrapper {...props} />;
                     }} />
                     <Route path="/users/:id" component={UserPage} />
                 </Switch>
