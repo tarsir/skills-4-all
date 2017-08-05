@@ -5,4 +5,14 @@
     padding: 20px;
     margin: 20px;
     max-width: 25%;
+    float: left;
+}
+
+.user-skill-container {
+    display: inline-block;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    background-color: #d9d9d9;
+    text-align: center;
 }

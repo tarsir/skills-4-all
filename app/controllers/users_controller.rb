@@ -5,12 +5,12 @@ class UsersController < ApiController
   def index
     @users = User.all
 
-    render json: @users
+    render json: @users.as_json(include:[:skills])
   end
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user.as_json(include:[:skills])
   end
 
   # POST /users

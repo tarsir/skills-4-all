@@ -1,8 +1,35 @@
 import React from 'react';
 
+import NewSkillSection from './skill_form';
+
 import { getUserById } from '../../api/user_api';
 
 import './user.css';
+
+function UserSkillItem(props) {
+    return (
+        <li className="user-skill-item">{props.text}</li>
+    );
+}
+
+function UserSkillSection(props) {
+    let userSkillList = null;
+    if (props.userSkills.length > 0) {
+        userSkillList = props.userSkills.map((skill) => {
+            return <UserSkillItem key={skill.description}
+                text={skill.description} />;
+        });
+    }
+
+    return (
+        <div className="user-skill-container">
+            <ul>
+                {userSkillList}
+                <NewSkillSection />
+            </ul>
+        </div>
+    )
+}
 
 function UserInfo(props) {
     console.log(props);
@@ -32,13 +59,18 @@ export default class UserPage extends React.Component {
     }
 
     render() {
-        let userInfo = null;
+        let userInfo = null, userSkills = null;
         if (this.state.userData) {
             userInfo = <UserInfo user={this.state.userData} />;
+
+            if (this.state.userData.skills) {
+                userSkills = <UserSkillSection userSkills={this.state.userData.skills} />;
+            }
         }
         return (
             <div>
                 {userInfo}
+                {userSkills}
             </div>
         );
     }
