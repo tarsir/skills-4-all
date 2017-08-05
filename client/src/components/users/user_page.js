@@ -1,22 +1,10 @@
 import React from 'react';
 
-import { addNewSkill } from '../../api/skill_api';
+import NewSkillSection from './skill_form';
+
 import { getUserById } from '../../api/user_api';
 
 import './user.css';
-
-function AddSkillButton() {
-    function addSkill(e) {
-        addNewSkill("java").then((response) => {
-            return response.json();
-        }).then((respJson) => {
-            // TODO: make this some kind of notification
-            console.log(respJson);
-        });
-    }
-
-    return (<button onClick={addSkill}>Add Skill</button>);
-}
 
 function UserSkillItem(props) {
     return (
@@ -37,7 +25,7 @@ function UserSkillSection(props) {
         <div className="user-skill-container">
             <ul>
                 {userSkillList}
-                <AddSkillButton />
+                <NewSkillSection />
             </ul>
         </div>
     )
