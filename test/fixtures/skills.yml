@@ -2,8 +2,6 @@
 
 one:
   description: MyString
-  user: one
 
 two:
   description: MyString
-  user: two

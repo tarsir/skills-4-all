@@ -12,7 +12,7 @@ class SkillsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create skill" do
     assert_difference('Skill.count') do
-      post skills_url, params: { skill: { description: @skill.description, user_id: @skill.user_id } }, as: :json
+      post skills_url, params: { skill: { description: @skill.description } }, as: :json
     end
 
     assert_response 201
@@ -21,18 +21,5 @@ class SkillsControllerTest < ActionDispatch::IntegrationTest
   test "should show skill" do
     get skill_url(@skill), as: :json
     assert_response :success
-  end
-
-  test "should update skill" do
-    patch skill_url(@skill), params: { skill: { description: @skill.description, user_id: @skill.user_id } }, as: :json
-    assert_response 200
-  end
-
-  test "should destroy skill" do
-    assert_difference('Skill.count', -1) do
-      delete skill_url(@skill), as: :json
-    end
-
-    assert_response 204
   end
 end

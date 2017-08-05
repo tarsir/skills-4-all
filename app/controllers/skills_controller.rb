@@ -1,4 +1,4 @@
-class SkillsController < ApplicationController
+class SkillsController < ApiController
   before_action :set_skill, only: [:show, :update, :destroy]
 
   # GET /skills
@@ -24,20 +24,6 @@ class SkillsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /skills/1
-  def update
-    if @skill.update(skill_params)
-      render json: @skill
-    else
-      render json: @skill.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /skills/1
-  def destroy
-    @skill.destroy
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_skill
@@ -46,6 +32,6 @@ class SkillsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def skill_params
-      params.require(:skill).permit(:description, :user_id)
+      params.require(:skill).permit(:description)
     end
 end

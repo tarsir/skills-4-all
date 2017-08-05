@@ -1,3 +1,3 @@
 ActiveAdmin.register User do
-    permit_params :title, :description, :steps, :source
+    permit_params :first_name, :last_name, :email
 end
