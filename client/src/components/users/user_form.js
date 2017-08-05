@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { getUserById } from '../../api/user_api';
 
@@ -31,3 +32,19 @@ export default class UserForm extends React.Component {
         )
     }
 }
+
+UserForm.defaultProps = {
+    match: {
+        params: {
+            id: false
+        }
+    }
+};
+
+UserForm.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            id: PropTypes.number
+        })
+    })
+};

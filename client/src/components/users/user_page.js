@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import NewSkillSection from './skill_form';
 
@@ -11,6 +12,10 @@ function UserSkillItem(props) {
         <li className="user-skill-item">{props.text}</li>
     );
 }
+
+UserSkillItem.propTypes = {
+    text: PropTypes.string
+};
 
 function UserSkillSection(props) {
     let userSkillList = null;
@@ -31,8 +36,15 @@ function UserSkillSection(props) {
     )
 }
 
+UserSkillSection.propTypes = {
+    userSkills: PropTypes.arrayOf(
+        PropTypes.shape({
+            description: PropTypes.string
+        })
+    )
+};
+
 function UserInfo(props) {
-    console.log(props);
     return (
         <div className="user-info">
             <h2>{props.user.first_name} {props.user.last_name}</h2>
@@ -40,6 +52,17 @@ function UserInfo(props) {
         </div>
     )
 }
+
+UserInfo.propTypes = {
+    user: PropTypes.shape({
+        first_name: PropTypes.string,
+        last_name: PropTypes.string,
+        email: PropTypes.string,
+        skills: PropTypes.arrayOf(PropTypes.shape({
+            description: PropTypes.string
+        }))
+    })
+};
 
 export default class UserPage extends React.Component {
     constructor(props) {
@@ -75,3 +98,11 @@ export default class UserPage extends React.Component {
         );
     }
 }
+
+UserInfo.propTypes = {
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            id: PropTypes.number
+        })
+    })
+};
