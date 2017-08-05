@@ -1,14 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route, Link} from 'react-router-dom';
 
 import UserPage from './user_page';
+import UserFormWrapper from './user_form';
 
 import { getUsers } from '../../api/user_api';
 import '../../assets/lists.css';
 
-function UserListHeader(props) {
+function UserListHeader() {
     return (
-        <h2><Link to="/users">User Listing</Link></h2>
+        <h2><Link to="/users">Users</Link></h2>
     );
 }
 
@@ -20,6 +22,16 @@ function UserListItem(props) {
         </li>
     );
 }
+
+UserListItem.propTypes = {
+    user: PropTypes.shape({
+        first_name: PropTypes.string,
+        last_name: PropTypes.string,
+        skills: PropTypes.arrayOf(PropTypes.shape({
+            description: PropTypes.string
+        }))
+    })
+};
 
 class UserList extends React.Component {
     constructor(props) {
@@ -49,6 +61,10 @@ class UserList extends React.Component {
     }
 }
 
+UserList.propTypes = {
+    users: PropTypes.arrayOf(PropTypes.object)
+};
+
 export default class Users extends React.Component {
     render() {
         return (
@@ -56,6 +72,12 @@ export default class Users extends React.Component {
                 <UserListHeader />
                 <Switch>
                     <Route exact path="/users" component={UserList} />
+                    <Route path="/users/new" render={(props) => {
+                        return <UserFormWrapper />;
+                    }} />
+                    <Route path="/users/edit/:id" render={(props) => {
+                        return <UserFormWrapper {...props} />;
+                    }} />
                     <Route path="/users/:id" component={UserPage} />
                 </Switch>
             </div>
