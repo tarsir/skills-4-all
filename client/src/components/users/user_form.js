@@ -4,24 +4,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route, Redirect} from 'react-router-dom';
 
 import { getUserById, addNewUser } from '../../api/user_api';
-
-function FormPassword(props) {
-    return (
-        <div className="form-group">
-            <label className="form-label">{props.labelText}</label>
-            <input type="password" className="form-input" value={props.value} onChange={props.changeHandler} />
-        </div>
-    )
-}
-
-function FormInput(props) {
-    return (
-        <div className="form-group">
-            <label className="form-label">{props.labelText}</label>
-            <input type="input" className="form-input" value={props.value} onChange={props.changeHandler} />
-        </div>
-    )
-}
+import { FormPassword, FormInput } from '../form/inputs';
 
 class UserForm extends React.Component {
     constructor(props) {
@@ -139,6 +122,7 @@ export default class UserFormWrapper extends React.Component {
         if (this.props.match) {
             userId = this.props.match.params.id;
         }
+        console.log(redirect);
 
         return (
             <Switch>
