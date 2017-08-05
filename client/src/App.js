@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route} from 'react-router-dom';
 import logo from './logo.svg';
 import Home from './components/home';
-import Users from './components/users/user_list';
+import Users from './components/users/users';
 import './App.css';
 
 class Header extends Component {

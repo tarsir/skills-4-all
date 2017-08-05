@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Link} from 'react-router-dom';
 
 import UserPage from './user_page';
+import UserForm from './user_form';
 
 import { getUsers } from '../../api/user_api';
 import '../../assets/lists.css';
@@ -56,6 +57,12 @@ export default class Users extends React.Component {
                 <UserListHeader />
                 <Switch>
                     <Route exact path="/users" component={UserList} />
+                    <Route path="/users/new" render={(props) => {
+                        return <UserForm />;
+                    }} />
+                    <Route path="/users/edit/:id" render={(props) => {
+                        return <UserForm {...props} />;
+                    }} />
                     <Route path="/users/:id" component={UserPage} />
                 </Switch>
             </div>
