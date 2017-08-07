@@ -35,4 +35,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 204
   end
+
+  test "should find first matching email" do
+    search_user = User.find_auth_user("test@test.com")
+    assert @user == search_user
+  end
+
 end
