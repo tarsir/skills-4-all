@@ -1,15 +1,31 @@
+function saveAuthToken(token) {
+    sessionStorage.setItem('authentication', token);
+}
+
+function getAuthToken() {
+    return sessionStorage.getItem('authentication');
+}
+
+function buildHeaders() {
+    return {
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json',
+        'Authorization' : getAuthToken()
+    }
+}
+
 function getUsers() {
-    return window.fetch('/users');
+    let headers = buildHeaders();
+    return window.fetch('/users', {headers});
 }
 
 function getUserById(userId) {
-    return window.fetch('/users/' + userId);
+    let headers = buildHeaders();
+    return window.fetch('/users/' + userId, {headers});
 }
 
 function updateUser(userId, userData) {
-    let headers = new Headers();
-
-    headers.append('Content-Type','application/json');
+    let headers = buildHeaders();
 
     let config = {
         method: 'PATCH',
@@ -25,9 +41,7 @@ function updateUser(userId, userData) {
 }
 
 function addNewUser(userData) {
-    let headers = new Headers();
-
-    headers.append('Content-Type','application/json');
+    let headers = buildHeaders();
 
     let config = {
         method: 'POST',
@@ -43,20 +57,19 @@ function addNewUser(userData) {
 }
 
 function login(loginData) {
-    let headers = new Headers();
-
-    headers.append('Content-Type','application/json');
+    let headers = buildHeaders();
 
     let config = {
         method: 'POST',
         headers,
         body: JSON.stringify({
+        user_login : {
             email: loginData.email,
             password: loginData.password
-        })
+        }})
     };
 
-    let req = new Request('/users/login', config);
+    let req = new Request('/login', config);
 
     return window.fetch(req);
 }
@@ -66,5 +79,6 @@ export {
     getUserById,
     login,
     updateUser,
-    addNewUser
+    addNewUser,
+    saveAuthToken
 };

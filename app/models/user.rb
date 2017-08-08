@@ -30,4 +30,8 @@ class User < ApplicationRecord
     self.update_columns(auth_token: nil)
   end
 
+  def valid_password?(password)
+    self.authenticate(password)
+  end
+
 end

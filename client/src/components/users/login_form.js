@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Switch, Route, Redirect} from 'react-router-dom';
 
-import { login } from '../../api/user_api';
+import { login, saveAuthToken } from '../../api/user_api';
 
 import { FormInput, FormPassword } from '../form/inputs';
 
@@ -27,7 +27,12 @@ class LoginForm extends React.Component {
             console.log(error);
         }).then((respJson) => {
             console.log(respJson);
-            this.props.successHandler();
+            if (!respJson.error) {
+                saveAuthToken(respJson['auth_token']);
+                this.props.successHandler();
+            } else {
+                alert("Password incorrect, please try again.");
+            }
         });
     }
 

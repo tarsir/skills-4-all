@@ -16,8 +16,8 @@ class ApiController < ActionController::API
 
   private
   def authenticate_token
-    if params[:auth_token]
-      User.find_by(auth_token: token)
+    if request.headers[:authorization]
+      User.find_by(auth_token: request.headers[:authorization])
     else
       false
     end
