@@ -1,4 +1,5 @@
 class ApiController < ActionController::API
+  before_action :require_login!
   helper_method :user_signed_in?, :current_user
 
   def user_signed_in?
@@ -7,6 +8,11 @@ class ApiController < ActionController::API
 
   def current_user
     @_current_user ||= authenticate_token
+  end
+
+  def require_login!
+    return true if authenticate_token
+    render json: { errors: [ { detail: "Forbidden" } ] }, status: 401
   end
 
   private

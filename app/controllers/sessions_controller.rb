@@ -1,4 +1,6 @@
 class SessionsController < ApiController
+  skip_before_action :require_login!, only: [:create]
+
   def create
     login_attempt = User.find_auth_user(params[:user_login][:email].downcase)
     login_attempt ||= User.new
