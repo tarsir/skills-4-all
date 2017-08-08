@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post "/login", to: "sessions#create"
+  post "/logout", to: "sessions#destroy"
+
   resources :skills
   resources :users
   devise_for :admin_users, ActiveAdmin::Devise.config
