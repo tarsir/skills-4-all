@@ -1,6 +1,5 @@
 class ApiController < ActionController::API
   before_action :require_login!
-  helper_method :user_signed_in?, :current_user
 
   def user_signed_in?
     current_user.present?
@@ -17,8 +16,10 @@ class ApiController < ActionController::API
 
   private
   def authenticate_token
-    authenticate_with_http_token do |token, options|
+    if params[:auth_token]
       User.find_by(auth_token: token)
+    else
+      false
     end
   end
 
