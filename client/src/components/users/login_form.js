@@ -6,6 +6,10 @@ import { login, saveAuthToken } from '../../api/user_api';
 
 import { FormInput, FormPassword } from '../form/inputs';
 
+function LoginHeader(props) {
+    return <h2>Login</h2>;
+}
+
 class LoginForm extends React.Component {
     constructor(props) {
         super(props);
@@ -46,11 +50,14 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <form className="login-form" onSubmit={this.handleSubmit}>
-                <FormInput labelText="Email" value={this.state.email} changeHandler={this.onEmailChange} />
-                <FormPassword labelText="Password" value={this.state.password} changeHandler={this.onPasswordChange} />
-                <input type="submit" value="Login" />
-            </form>
+            <div className="login-form-container">
+                <LoginHeader />
+                <form className="login-form" onSubmit={this.handleSubmit}>
+                    <FormInput labelText="Email" value={this.state.email} changeHandler={this.onEmailChange} />
+                    <FormPassword labelText="Password" value={this.state.password} changeHandler={this.onPasswordChange} />
+                    <input type="submit" value="Login" />
+                </form>
+            </div>
         );
     }
 }

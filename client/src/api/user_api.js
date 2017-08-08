@@ -2,6 +2,25 @@ function saveAuthToken(token) {
     sessionStorage.setItem('authentication', token);
 }
 
+function isLoggedIn(token) {
+    return sessionStorage.getItem('authentication') !== null;
+}
+
+function logout() {
+    console.log("Logging out");
+    sessionStorage.removeItem('authentication');
+    let headers = buildHeaders();
+
+    let config = {
+        method: 'POST',
+        headers
+    };
+
+    let req = new Request('/logout', config);
+
+    return window.fetch(req);
+}
+
 function getAuthToken() {
     return sessionStorage.getItem('authentication');
 }
@@ -78,6 +97,8 @@ export {
     getUsers,
     getUserById,
     login,
+    logout,
+    isLoggedIn,
     updateUser,
     addNewUser,
     saveAuthToken

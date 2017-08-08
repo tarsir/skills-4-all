@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route} from 'react-router-dom';
-import logo from './logo.svg';
 import Home from './components/home';
+import Header from './components/header';
 import Users from './components/users/users';
 import Login from './components/users/login_form';
+import Logout from './components/logout';
 import './App.css';
-
-class Header extends Component {
-  render() {
-    return (
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to React</h2>
-      </div>
-    );
-  }
-}
 
 class Main extends Component {
   render() {
@@ -24,6 +14,7 @@ class Main extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
+          <Route path='/logout' component={Logout} />
           <Route path='/users' component={Users} />
         </Switch>
       </div>
