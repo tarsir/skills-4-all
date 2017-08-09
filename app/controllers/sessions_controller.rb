@@ -7,7 +7,7 @@ class SessionsController < ApiController
 
     if login_attempt.valid_password?(params[:user_login][:password])
       auth_token = login_attempt.generate_auth_token
-      render json: { auth_token: auth_token }
+      render json: { auth_token: auth_token, user_id: login_attempt.id }
     else
       invalid_login
     end
