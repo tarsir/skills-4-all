@@ -15,7 +15,6 @@ function UserListHeader() {
 }
 
 function UserListItem(props) {
-    console.log(props);
     return (
         <li className="user-list-item">
             <Link to={{ pathname: '/users/' + props.user.id }}>{props.user.first_name} {props.user.last_name} ({props.user.skills.length})</Link>
@@ -51,7 +50,7 @@ class UserList extends React.Component {
 
     render() {
         const userList = this.state.users.map((user) => {
-            return <UserListItem key={user.first_name.toString()}
+            return <UserListItem key={user.id}
                 user={user} />
         });
 
