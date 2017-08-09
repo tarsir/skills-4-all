@@ -1,14 +1,9 @@
-function saveAuthToken(token) {
-    sessionStorage.setItem('authentication', token);
-}
-
-function isLoggedIn(token) {
-    return sessionStorage.getItem('authentication') !== null;
-}
+import { clearAuth, buildHeaders } from './auth_methods';
 
 function logout() {
     console.log("Logging out");
-    sessionStorage.removeItem('authentication');
+    clearAuth();
+
     let headers = buildHeaders();
 
     let config = {
@@ -19,18 +14,6 @@ function logout() {
     let req = new Request('/logout', config);
 
     return window.fetch(req);
-}
-
-function getAuthToken() {
-    return sessionStorage.getItem('authentication');
-}
-
-function buildHeaders() {
-    return {
-        'Content-Type' : 'application/json',
-        'Accept' : 'application/json',
-        'Authorization' : getAuthToken()
-    }
 }
 
 function getUsers() {
@@ -98,8 +81,6 @@ export {
     getUserById,
     login,
     logout,
-    isLoggedIn,
     updateUser,
-    addNewUser,
-    saveAuthToken
+    addNewUser
 };

@@ -1,7 +1,7 @@
-function addNewSkill(skillDescription) {
-    let headers = new Headers();
+import { buildHeaders, getUserId } from './auth_methods';
 
-    headers.append('Content-Type','application/json');
+function addNewSkill(skillDescription, userId) {
+    let headers = buildHeaders();
 
     let config = {
         method: 'POST',
@@ -9,7 +9,9 @@ function addNewSkill(skillDescription) {
         body: JSON.stringify({
             skill: {
                 description: skillDescription
-            }
+            },
+            voter: getUserId(),
+            receiver: userId
         })
     };
 
