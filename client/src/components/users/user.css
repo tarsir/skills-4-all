@@ -16,3 +16,14 @@
     background-color: #d9d9d9;
     text-align: center;
 }
+
+.user-skill-item {
+    margin: 16px 4px;
+}
+
+.vote-count-badge {
+    background-color: #c9c9ff;
+    border-radius: 40px;
+    border: 1px solid black;
+    padding: 4px;
+}

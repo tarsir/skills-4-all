@@ -9,7 +9,7 @@ import './user.css';
 
 function UserSkillItem(props) {
     return (
-        <li className="user-skill-item">({props.count}) {props.text}</li>
+        <li className="user-skill-item"><span className="vote-count-badge">{props.count}</span> {props.text}</li>
     );
 }
 
@@ -22,7 +22,7 @@ function UserSkillSection(props) {
     if (props.userSkills.length > 0) {
         userSkillList = props.userSkills.map((skill) => {
             return <UserSkillItem key={skill.skill_id}
-                text={skill.skill_id}
+                text={skill.skill_description}
                 count={skill.skill_vote_count}/>;
         });
     }
