@@ -9,7 +9,7 @@ import './user.css';
 
 function UserSkillItem(props) {
     return (
-        <li className="user-skill-item">{props.text}</li>
+        <li className="user-skill-item">({props.count}) {props.text}</li>
     );
 }
 
@@ -21,8 +21,9 @@ function UserSkillSection(props) {
     let userSkillList = null;
     if (props.userSkills.length > 0) {
         userSkillList = props.userSkills.map((skill) => {
-            return <UserSkillItem key={skill.description}
-                text={skill.description} />;
+            return <UserSkillItem key={skill.skill_id}
+                text={skill.skill_id}
+                count={skill.skill_vote_count}/>;
         });
     }
 
@@ -78,6 +79,7 @@ export default class UserPage extends React.Component {
             .then((user) => {
                 return user.json();
             }).then((userData) => {
+                console.log(userData);
                 this.setState({userData});
             });
     }
@@ -87,8 +89,8 @@ export default class UserPage extends React.Component {
         if (this.state.userData) {
             userInfo = <UserInfo user={this.state.userData} />;
 
-            if (this.state.userData.skills) {
-                userSkills = <UserSkillSection userSkills={this.state.userData.skills} userId={this.state.userData.id} />;
+            if (this.state.userData.user_skills) {
+                userSkills = <UserSkillSection userSkills={this.state.userData.user_skills} userId={this.state.userData.id} />;
             }
         }
 

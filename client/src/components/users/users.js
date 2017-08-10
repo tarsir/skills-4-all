@@ -17,7 +17,7 @@ function UserListHeader() {
 function UserListItem(props) {
     return (
         <li className="user-list-item">
-            <Link to={{ pathname: '/users/' + props.user.id }}>{props.user.first_name} {props.user.last_name} ({props.user.skills.length})</Link>
+            <Link to={{ pathname: '/users/' + props.user.id }}>{props.user.first_name} {props.user.last_name}</Link>
         </li>
     );
 }
@@ -44,6 +44,7 @@ class UserList extends React.Component {
         getUsers().then((response) => {
             return response.json();
         }).then((respJson) => {
+            console.log(respJson);
             this.setState({users: respJson});
         });
     }

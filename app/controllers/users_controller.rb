@@ -5,12 +5,12 @@ class UsersController < ApiController
   def index
     @users = User.all
 
-    render json: @users.as_json(include:[:skills])
+    render json: @users.as_json(except: ["password_digest", "auth_token", "created_at", "updated_at"])
   end
 
   # GET /users/1
   def show
-    render json: @user.as_json(include:[:skills])
+    render json: @user.as_json(:include => { :user_skills => {methods: :skill_vote_count } }, :except => ["password_digest", "auth_token"])
   end
 
   # POST /users
