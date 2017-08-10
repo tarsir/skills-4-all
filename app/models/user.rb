@@ -15,8 +15,6 @@ class User < ApplicationRecord
   has_many :user_skills
   has_many :user_skill_votes
   has_many :skills, through: :user_skills
-  belongs_to :voter, :class_name => "UserSkillVote"
-  belongs_to :receiver, :class_name => "UserSkillVote"
 
   # Find the user with the given email for authentication purposes
   def self.find_auth_user(search_email) 
