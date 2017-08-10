@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :user_skills
+  has_many :user_skill_votes
   has_many :skills, through: :user_skills
 
   # Find the user with the given email for authentication purposes

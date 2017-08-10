@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect, Link} from 'react-router-dom';
 
-import { isLoggedIn } from '../api/user_api';
+import { isLoggedIn } from '../api/auth_methods';
 import logo from '../logo.svg';
 
 export default class Header extends Component {

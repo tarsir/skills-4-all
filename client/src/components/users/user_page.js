@@ -30,7 +30,7 @@ function UserSkillSection(props) {
         <div className="user-skill-container">
             <ul>
                 {userSkillList}
-                <NewSkillSection />
+                <NewSkillSection userId={props.userId} />
             </ul>
         </div>
     )
@@ -41,7 +41,8 @@ UserSkillSection.propTypes = {
         PropTypes.shape({
             description: PropTypes.string
         })
-    )
+    ),
+    userId: PropTypes.number
 };
 
 function UserInfo(props) {
@@ -87,9 +88,10 @@ export default class UserPage extends React.Component {
             userInfo = <UserInfo user={this.state.userData} />;
 
             if (this.state.userData.skills) {
-                userSkills = <UserSkillSection userSkills={this.state.userData.skills} />;
+                userSkills = <UserSkillSection userSkills={this.state.userData.skills} userId={this.state.userData.id} />;
             }
         }
+
         return (
             <div>
                 {userInfo}
@@ -99,10 +101,10 @@ export default class UserPage extends React.Component {
     }
 }
 
-UserInfo.propTypes = {
+UserPage.propTypes = {
     match: PropTypes.shape({
         params: PropTypes.shape({
-            id: PropTypes.number
+            id: PropTypes.string
         })
     })
 };
