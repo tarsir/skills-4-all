@@ -37,8 +37,8 @@ class SkillsController < ApiController
     end
 
     def add_to_user
-      voter = params[:voter], receiver = params[:receiver]
-      pp @skill
+      voter = params[:voter]
+      receiver = params[:receiver]
       unless UserSkill.find_by user_id: receiver, skill_id: @skill.id
         UserSkill.create(user_id: receiver, skill_id: @skill.id)
       end

@@ -20,7 +20,7 @@ function getAuthToken() {
 }
 
 function getUserId() {
-    return sessionStorage.getItem(USER_ID_KEY);
+    return parseInt(sessionStorage.getItem(USER_ID_KEY));
 }
 
 function buildHeaders() {

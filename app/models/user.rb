@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :user_skills
+  has_many :user_skill_votes
   has_many :skills, through: :user_skills
   belongs_to :voter, :class_name => "UserSkillVote"
   belongs_to :receiver, :class_name => "UserSkillVote"
