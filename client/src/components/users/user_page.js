@@ -4,12 +4,39 @@ import PropTypes from 'prop-types';
 import NewSkillSection from './skill_form';
 
 import { getUserById } from '../../api/user_api';
+import { getUserId } from '../../api/auth_methods';
 
 import './user.css';
 
-function UserSkillItem(props) {
+function hasUserVoted(voterList) {
+    let currentUser = getUserId();
+    return voterList.find(voter => {
+        return voter.voter_id == currentUser
+    }) !== undefined;
+}
+
+function VotedBadge(props) {
     return (
-        <li className="user-skill-item"><span className="vote-count-badge">{props.count}</span> {props.text}</li>
+        <div className="vote-count-badge yes-vote">{props.count}</div>
+    );
+}
+
+function NotVotedBadge(props) {
+    return (
+        <div className="vote-count-badge no-vote">{props.count}</div>
+    );
+}
+
+function UserSkillItem(props) {
+    let badge;
+    if (props.userVoted) {
+        badge = <VotedBadge count={props.count} />;
+    } else {
+        badge = <NotVotedBadge count={props.count} />;
+    }
+
+    return (
+        <li className="user-skill-item">{badge} {props.text}</li>
     );
 }
 
@@ -23,13 +50,14 @@ function UserSkillSection(props) {
         userSkillList = props.userSkills.map((skill) => {
             return <UserSkillItem key={skill.skill_id}
                 text={skill.skill_description}
-                count={skill.skill_vote_count}/>;
+                count={skill.skill_vote_count}
+                userVoted={hasUserVoted(skill.voter_list)} />;
         });
     }
 
     return (
         <div className="user-skill-container">
-            <ul>
+            <ul className="user-skill-list">
                 {userSkillList}
                 <NewSkillSection userId={props.userId} />
             </ul>
