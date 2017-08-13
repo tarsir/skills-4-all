@@ -20,6 +20,46 @@ function addNewSkill(skillDescription, userId) {
     return window.fetch(req);
 }
 
+function addVote(skillId, receiverId) {
+    let headers = buildHeaders();
+
+    let config = {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            skillId,
+            voter: getUserId(),
+            receiver: receiverId
+        })
+    };
+
+    let req = new Request('/skills/vote', config);
+    console.log(config);
+
+    // return window.fetch(req);
+}
+
+function removeVote(skillId, receiverId) {
+    let headers = buildHeaders();
+
+    let config = {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            skillId,
+            voter: getUserId(),
+            receiver: receiverId
+        })
+    };
+
+    let req = new Request('/skills/vote', config);
+    console.log(config);
+
+    // return window.fetch(req);
+}
+
 export {
-    addNewSkill
+    addNewSkill,
+    addVote,
+    removeVote
 };

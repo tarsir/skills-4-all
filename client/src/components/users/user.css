@@ -19,6 +19,10 @@
     margin: 16px 4px;
 }
 
+.vote-count-badge:hover {
+    cursor: pointer;
+}
+
 .vote-count-badge {
     background-color: #c9c9ff;
     border-radius: 40px;
