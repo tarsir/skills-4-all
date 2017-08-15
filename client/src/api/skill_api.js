@@ -33,10 +33,9 @@ function addVote(skillId, receiverId) {
         })
     };
 
-    let req = new Request('/skills/vote', config);
-    console.log(config);
+    let req = new Request('/votes/add', config);
 
-    // return window.fetch(req);
+    return window.fetch(req);
 }
 
 function removeVote(skillId, receiverId) {
@@ -52,10 +51,9 @@ function removeVote(skillId, receiverId) {
         })
     };
 
-    let req = new Request('/skills/vote', config);
-    console.log(config);
+    let req = new Request('/votes/remove', config);
 
-    // return window.fetch(req);
+    return window.fetch(req);
 }
 
 export {

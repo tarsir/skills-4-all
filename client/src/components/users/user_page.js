@@ -49,9 +49,9 @@ class UserSkillItem extends React.Component {
     render() {
         let badge;
         if (this.props.userVoted) {
-            badge = <VotedBadge clickHandler={this.addVoteToSkill} count={this.props.count} />;
+            badge = <VotedBadge clickHandler={this.removeVoteFromSkill} count={this.props.count} />;
         } else {
-            badge = <NotVotedBadge clickHandler={this.removeVoteFromSkill} count={this.props.count} />;
+            badge = <NotVotedBadge clickHandler={this.addVoteToSkill} count={this.props.count} />;
         }
 
         return (
