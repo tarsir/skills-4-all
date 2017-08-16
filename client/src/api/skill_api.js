@@ -1,5 +1,10 @@
 import { buildHeaders, getUserId } from './auth_methods';
 
+function getSkill(skillId) {
+    let headers = buildHeaders();
+    return window.fetch('/skills/' + skillId, {headers});
+}
+
 function addNewSkill(skillDescription, userId) {
     let headers = buildHeaders();
 
@@ -57,6 +62,7 @@ function removeVote(skillId, receiverId) {
 }
 
 export {
+    getSkill,
     addNewSkill,
     addVote,
     removeVote
