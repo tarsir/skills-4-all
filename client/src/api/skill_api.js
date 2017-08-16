@@ -1,5 +1,10 @@
 import { buildHeaders, getUserId } from './auth_methods';
 
+function getSkill(skillId) {
+    let headers = buildHeaders();
+    return window.fetch('/skills/' + skillId, {headers});
+}
+
 function addNewSkill(skillDescription, userId) {
     let headers = buildHeaders();
 
@@ -20,6 +25,45 @@ function addNewSkill(skillDescription, userId) {
     return window.fetch(req);
 }
 
+function addVote(skillId, receiverId) {
+    let headers = buildHeaders();
+
+    let config = {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            skillId,
+            voter: getUserId(),
+            receiver: receiverId
+        })
+    };
+
+    let req = new Request('/votes/add', config);
+
+    return window.fetch(req);
+}
+
+function removeVote(skillId, receiverId) {
+    let headers = buildHeaders();
+
+    let config = {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            skillId,
+            voter: getUserId(),
+            receiver: receiverId
+        })
+    };
+
+    let req = new Request('/votes/remove', config);
+
+    return window.fetch(req);
+}
+
 export {
-    addNewSkill
+    getSkill,
+    addNewSkill,
+    addVote,
+    removeVote
 };

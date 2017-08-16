@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  post 'votes/add'
+
+  post 'votes/remove'
+
   post "/login", to: "sessions#create"
   post "/logout", to: "sessions#destroy"
 

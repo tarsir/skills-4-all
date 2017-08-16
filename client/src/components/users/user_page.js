@@ -4,36 +4,129 @@ import PropTypes from 'prop-types';
 import NewSkillSection from './skill_form';
 
 import { getUserById } from '../../api/user_api';
+import { addVote, removeVote } from '../../api/skill_api';
+import { getUserId } from '../../api/auth_methods';
 
 import './user.css';
 
-function UserSkillItem(props) {
+function hasUserVoted(voterList) {
+    let currentUser = getUserId();
+    return voterList.find(voter => {
+        return voter.voter_id == currentUser
+    }) !== undefined;
+}
+
+function VotedBadge(props) {
     return (
-        <li className="user-skill-item">{props.text}</li>
+        <div onClick={props.clickHandler} className="vote-count-badge yes-vote">{props.count}</div>
     );
+}
+
+function NotVotedBadge(props) {
+    return (
+        <div onClick={props.clickHandler} className="vote-count-badge no-vote">{props.count}</div>
+    );
+}
+
+function UserSkillItemDisplay(props) {
+    return (
+        <li className="user-skill-item">{props.badge} {props.text}</li>
+    );
+}
+
+class UserSkillItem extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.addVoteToSkill = this.addVoteToSkill.bind(this);
+        this.removeVoteFromSkill = this.removeVoteFromSkill.bind(this);
+    }
+
+    addVoteToSkill() {
+        addVote(this.props.skillId, this.props.userId)
+            .then(response => {
+                return response.json();
+            }).then(voteJson => {
+                getUserById(this.props.userId)
+                    .then((response) => {
+                        return response.json();
+                    }).then((respJson) => {
+                        this.props.updateSkills(respJson.user_skills);
+                    });
+            });;
+    }
+
+    removeVoteFromSkill() {
+        removeVote(this.props.skillId, this.props.userId)
+            .then(response => {
+                if (response.ok) {
+                    getUserById(this.props.userId)
+                        .then((response) => {
+                            return response.json();
+                        }).then((respJson) => {
+                            this.props.updateSkills(respJson.user_skills);
+                        });
+                }
+            });
+    }
+
+    render() {
+        let badge;
+        if (this.props.userVoted) {
+            badge = <VotedBadge clickHandler={this.removeVoteFromSkill} count={this.props.count} />;
+        } else {
+            badge = <NotVotedBadge clickHandler={this.addVoteToSkill} count={this.props.count} />;
+        }
+
+        return (
+            <UserSkillItemDisplay badge={badge} text={this.props.text} />
+        );
+    }
 }
 
 UserSkillItem.propTypes = {
     text: PropTypes.string
 };
 
-function UserSkillSection(props) {
-    let userSkillList = null;
-    if (props.userSkills.length > 0) {
-        userSkillList = props.userSkills.map((skill) => {
-            return <UserSkillItem key={skill.description}
-                text={skill.description} />;
-        });
+class UserSkillSection extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            userSkills: props.userSkills
+        };
+
+        this.updateUserSkills = this.updateUserSkills.bind(this);
     }
 
-    return (
-        <div className="user-skill-container">
-            <ul>
-                {userSkillList}
-                <NewSkillSection userId={props.userId} />
-            </ul>
-        </div>
-    )
+
+    updateUserSkills(newSkills) {
+        this.setState({userSkills: newSkills});
+    }
+
+    render() {
+        let userSkillList = null;
+        if (this.state.userSkills.length > 0) {
+            userSkillList = this.state.userSkills.map((skill) => {
+                return <UserSkillItem key={skill.skill_id}
+                    skillId={skill.skill_id}
+                    text={skill.skill_description}
+                    count={skill.skill_vote_count}
+                    userId={this.props.userId}
+                    updateSkills={this.updateUserSkills}
+                    userVoted={hasUserVoted(skill.voter_list)} />;
+            });
+        }
+
+        return (
+            <div className="user-skill-container">
+                <ul className="user-skill-list">
+                    {userSkillList}
+                    <NewSkillSection userId={this.props.userId} />
+                </ul>
+            </div>
+        )
+    }
 }
 
 UserSkillSection.propTypes = {
@@ -87,8 +180,8 @@ export default class UserPage extends React.Component {
         if (this.state.userData) {
             userInfo = <UserInfo user={this.state.userData} />;
 
-            if (this.state.userData.skills) {
-                userSkills = <UserSkillSection userSkills={this.state.userData.skills} userId={this.state.userData.id} />;
+            if (this.state.userData.user_skills) {
+                userSkills = <UserSkillSection userSkills={this.state.userData.user_skills} userId={this.state.userData.id} />;
             }
         }
 
