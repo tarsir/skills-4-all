@@ -17,7 +17,6 @@ class VotesController < ApiController
     receiver = params[:receiver]
     skill_id = params[:skillId]
 
-    pp params
     vote = UserSkillVote.find_by voter_id: voter, receiver_id: receiver, skill_id: skill_id
     if vote
       vote.destroy

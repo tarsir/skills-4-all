@@ -44,7 +44,6 @@ class UserList extends React.Component {
         getUsers().then((response) => {
             return response.json();
         }).then((respJson) => {
-            console.log(respJson);
             this.setState({users: respJson});
         });
     }
