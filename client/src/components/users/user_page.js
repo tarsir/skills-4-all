@@ -16,6 +16,10 @@ function hasUserVoted(voterList) {
     }) !== undefined;
 }
 
+function skillCompareByVotes(a, b) {
+    return b.skill_vote_count - a.skill_vote_count;
+}
+
 function VotedBadge(props) {
     return (
         <div onClick={props.clickHandler} className="vote-count-badge yes-vote">{props.count}</div>
@@ -85,12 +89,15 @@ class UserSkillItem extends React.Component {
 }
 
 UserSkillItem.propTypes = {
-    text: PropTypes.string
+    text: PropTypes.string,
+    updateSkills: PropTypes.func
 };
 
 class UserSkillSection extends React.Component {
     constructor(props) {
         super(props);
+
+        props.userSkills.sort(skillCompareByVotes);
 
         this.state = {
             userSkills: props.userSkills
@@ -99,8 +106,8 @@ class UserSkillSection extends React.Component {
         this.updateUserSkills = this.updateUserSkills.bind(this);
     }
 
-
     updateUserSkills(newSkills) {
+        newSkills.sort(skillCompareByVotes);
         this.setState({userSkills: newSkills});
     }
 
@@ -122,7 +129,8 @@ class UserSkillSection extends React.Component {
             <div className="user-skill-container">
                 <ul className="user-skill-list">
                     {userSkillList}
-                    <NewSkillSection userId={this.props.userId} />
+                    <NewSkillSection userId={this.props.userId} 
+                        updateSkills={this.updateUserSkills} />
                 </ul>
             </div>
         )
