@@ -10,7 +10,7 @@ import '../../assets/lists.css';
 
 function UserListHeader() {
     return (
-        <h2><Link to="/users">Users</Link></h2>
+        <h2>Users</h2>
     );
 }
 
