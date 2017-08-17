@@ -56,7 +56,7 @@ export default class Header extends Component {
         return (
             <div className="App-header">
                 <ul className="navbar">
-                    <li><h2 className="title"><Link to="/">Skills 4 All</Link></h2></li>
+                    <li><h2 className="title"><Link to="/">Skillz 4 All</Link></h2></li>
                     { userListLink }
                     { userGreeting }
                     { authLink }
