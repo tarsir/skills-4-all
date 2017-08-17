@@ -38,9 +38,15 @@ class AddSkillForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input type="text" value={this.state.newSkill} onChange={this.handleChange} />
-                <input type="submit" value="Add" />
+            <form className="form" onSubmit={this.handleSubmit}>
+                <div className="form-item">
+                    <div className="append">
+                        <input type="text" value={this.state.newSkill} 
+                            onChange={this.handleChange} 
+                            placeholder="Skill name"/>
+                        <button className="button">Add</button>
+                    </div>
+                </div>
             </form>
         )
     }
