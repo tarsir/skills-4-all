@@ -52,12 +52,16 @@ class LoginForm extends React.Component {
     render() {
         return (
             <div className="login-form-container">
-                <LoginHeader />
-                <form className="login-form" onSubmit={this.handleSubmit}>
-                    <FormInput labelText="Email" value={this.state.email} changeHandler={this.onEmailChange} />
-                    <FormPassword labelText="Password" value={this.state.password} changeHandler={this.onPasswordChange} />
-                    <input type="submit" value="Login" />
-                </form>
+                <fieldset>
+                    <legend>Login</legend>
+                    <form onSubmit={this.handleSubmit}>
+                        <FormInput labelText="Email" value={this.state.email} changeHandler={this.onEmailChange} />
+                        <FormPassword labelText="Password" value={this.state.password} changeHandler={this.onPasswordChange} />
+                        <div className="form-item">
+                            <input type="submit" className="button" value="Login" />
+                        </div>
+                    </form>
+                </fieldset>
             </div>
         );
     }

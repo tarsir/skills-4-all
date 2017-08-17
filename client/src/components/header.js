@@ -43,7 +43,7 @@ export default class Header extends Component {
     }
 
     render() {
-        let authLink, userGreeting, userListLink;
+        let authLink, userGreeting, userListLink, registerLink;
 
         if (this.state.currentUser) {
             userGreeting = <li><h4><UserGreeting name={this.state.currentUser.first_name} userId={this.state.currentUser.id} /></h4></li>;
@@ -51,6 +51,7 @@ export default class Header extends Component {
             userListLink = <li><h4><Link to="/users">User List</Link></h4></li>;
         } else {
             authLink = <li><h4><Link to="/login">Login</Link></h4></li>;
+            registerLink = <li><h4><Link to="/users/new">Register</Link></h4></li>;
         }
 
         return (
@@ -60,6 +61,7 @@ export default class Header extends Component {
                     { userListLink }
                     { userGreeting }
                     { authLink }
+                    { registerLink }
                 </ul>
             </div>
         );

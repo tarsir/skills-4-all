@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 function FormPassword(props) {
     return (
-        <div className="form-group">
-            <label className="form-label">{props.labelText}</label>
-            <input type="password" className="form-input" value={props.value} onChange={props.changeHandler} />
+        <div className="form-item">
+            <label>{props.labelText}</label>
+            <input className="w50" type="password" value={props.value} onChange={props.changeHandler} />
         </div>
     )
 }
@@ -18,9 +18,9 @@ FormPassword.propTypes = {
 
 function FormInput(props) {
     return (
-        <div className="form-group">
-            <label className="form-label">{props.labelText}</label>
-            <input type="input" className="form-input" value={props.value} onChange={props.changeHandler} />
+        <div className="form-item">
+            <label>{props.labelText}</label>
+            <input className="w50" type="input" value={props.value} onChange={props.changeHandler} />
         </div>
     )
 }

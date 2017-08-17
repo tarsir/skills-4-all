@@ -37,13 +37,14 @@
     float: left;
 }
 
-.vote-count-badge > span {
-}
-
 .yes-vote {
     background-color: #a9ffa9;
 }
 
 .no-vote {
     background-color: #e9e9e9;
+}
+
+.form-item > label {
+    text-align: left;
 }
