@@ -38,6 +38,12 @@ function UserSkillItemDisplay(props) {
     );
 }
 
+function UserPageHeader(props) {
+    return (
+        <h2>{props.user.first_name} {props.user.last_name}</h2>
+    );
+}
+
 class UserSkillItem extends React.Component {
     constructor(props) {
         super(props);
@@ -149,7 +155,7 @@ UserSkillSection.propTypes = {
 function UserInfo(props) {
     return (
         <div className="user-info">
-            <h2>{props.user.first_name} {props.user.last_name}</h2>
+            <h2>User Info</h2>
             <h4>Email: {props.user.email}</h4>
         </div>
     )
@@ -184,8 +190,9 @@ export default class UserPage extends React.Component {
     }
 
     render() {
-        let userInfo = null, userSkills = null;
+        let userInfo = null, userSkills = null, userPageHeader = null;
         if (this.state.userData) {
+            userPageHeader = <UserPageHeader user={this.state.userData} />;
             userInfo = <UserInfo user={this.state.userData} />;
 
             if (this.state.userData.user_skills) {
@@ -195,6 +202,7 @@ export default class UserPage extends React.Component {
 
         return (
             <div>
+                {userPageHeader}
                 {userInfo}
                 {userSkills}
             </div>

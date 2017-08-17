@@ -54,9 +54,14 @@ class UserList extends React.Component {
                 user={user} />
         });
 
-        return <ul className="user-list">
-            {userList}
-        </ul>;
+        return (
+            <div>
+                <UserListHeader />
+                <ul className="user-list">
+                    {userList}
+                </ul>
+            </div>
+        );
     }
 }
 
@@ -68,7 +73,6 @@ export default class Users extends React.Component {
     render() {
         return (
             <div>
-                <UserListHeader />
                 <Switch>
                     <Route exact path="/users" component={UserList} />
                     <Route path="/users/new" render={(props) => {

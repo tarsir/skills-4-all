@@ -43,21 +43,23 @@ export default class Header extends Component {
     }
 
     render() {
-        let authLink, userGreeting;
+        let authLink, userGreeting, userListLink;
 
         if (this.state.currentUser) {
-            userGreeting = <UserGreeting name={this.state.currentUser.first_name} userId={this.state.currentUser.id} />;
-            authLink = <Link to="/logout">Logout</Link>;
+            userGreeting = <li><h4><UserGreeting name={this.state.currentUser.first_name} userId={this.state.currentUser.id} /></h4></li>;
+            authLink = <li><h4><Link to="/logout">Logout</Link></h4></li>;
+            userListLink = <li><h4><Link to="/users">User List</Link></h4></li>;
         } else {
-            authLink = <Link to="/login">Login</Link>;
+            authLink = <li><h4><Link to="/login">Login</Link></h4></li>;
         }
 
         return (
             <div className="App-header">
                 <ul className="navbar">
                     <li><h2 className="title"><Link to="/">Skills 4 All</Link></h2></li>
-                    <li>{ userGreeting }</li>
-                    <li>{ authLink }</li>
+                    { userListLink }
+                    { userGreeting }
+                    { authLink }
                 </ul>
             </div>
         );
