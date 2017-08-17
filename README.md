@@ -1,24 +1,3 @@
-# README
+# Skills-4-All
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+When you're looking to build your professional network, it's good to know what kind of skills your connections have. With Skills-4-All, you can do exactly that! Find your fellow professionals and see what their colleagues and peers have said they're phenomenal at - and add your own voice to the discussion of your skills as well as your network's!
