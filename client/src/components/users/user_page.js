@@ -132,7 +132,7 @@ class UserSkillSection extends React.Component {
         }
 
         return (
-            <div className="user-skill-container">
+            <div className="user-skill-container shadow-section box-section">
                 <ul className="user-skill-list">
                     {userSkillList}
                     <NewSkillSection userId={this.props.userId} 
@@ -154,7 +154,7 @@ UserSkillSection.propTypes = {
 
 function UserInfo(props) {
     return (
-        <div className="user-info">
+        <div className="user-info shadow-section box-section">
             <h2>User Info</h2>
             <h4>Email: {props.user.email}</h4>
         </div>
