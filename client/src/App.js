@@ -6,6 +6,7 @@ import Users from './components/users/users';
 import Login from './components/users/login_form';
 import Logout from './components/logout';
 import './App.css';
+import './assets/kube/kube.css';
 
 class Main extends Component {
   render() {
