@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { addNewSkill } from '../../api/skill_api';
+import { getUserById } from '../../api/user_api';
 
 class AddSkillForm extends React.Component {
     constructor(props) {
@@ -26,7 +27,11 @@ class AddSkillForm extends React.Component {
             console.log(errorJson);
         }).then((respJson) => {
             // TODO: make this some kind of notification
-            console.log(respJson);
+            getUserById(this.props.userId).then((response) => {
+                return response.json();
+            }).then((respJson) => {
+                this.props.updateSkills(respJson.user_skills);
+            });
             this.props.showButton();
         });
     }
@@ -42,7 +47,8 @@ class AddSkillForm extends React.Component {
 }
 
 AddSkillForm.propTypes = {
-    userId: PropTypes.number
+    userId: PropTypes.number,
+    updateSkills: PropTypes.func
 };
 
 export default class NewSkillSection extends React.Component {
@@ -68,7 +74,8 @@ export default class NewSkillSection extends React.Component {
         let addSkillButton, addSkillForm;
         if (this.state.addingSkill) {
             addSkillForm = <AddSkillForm userId={this.props.userId}
-                                showButton={this.switchToButton} />;
+                                showButton={this.switchToButton}
+                                updateSkills={this.props.updateSkills} />;
         } else {
             addSkillButton = <button onClick={this.switchToForm}>Add Skill</button>;
         }
@@ -83,5 +90,6 @@ export default class NewSkillSection extends React.Component {
 }
 
 NewSkillSection.propTypes = {
-    userId: PropTypes.number
+    userId: PropTypes.number,
+    updateSkills: PropTypes.func
 };
