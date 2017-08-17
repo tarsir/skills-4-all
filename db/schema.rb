@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170806175716) do
+ActiveRecord::Schema.define(version: 20170809001443) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -47,6 +47,17 @@ ActiveRecord::Schema.define(version: 20170806175716) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_skill_votes", force: :cascade do |t|
+    t.integer "voter_id"
+    t.integer "receiver_id"
+    t.integer "skill_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["receiver_id"], name: "index_user_skill_votes_on_receiver_id"
+    t.index ["skill_id"], name: "index_user_skill_votes_on_skill_id"
+    t.index ["voter_id"], name: "index_user_skill_votes_on_voter_id"
   end
 
   create_table "user_skills", force: :cascade do |t|

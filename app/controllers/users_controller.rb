@@ -1,5 +1,5 @@
 class UsersController < ApiController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:update, :destroy]
 
   # GET /users
   def index
@@ -10,7 +10,27 @@ class UsersController < ApiController
 
   # GET /users/1
   def show
-    render json: @user.as_json(:include => [:user_skill_votes, { :user_skills => {methods: [ :voter_list, :skill_vote_count, :skill_description ]} }], :except => ["password_digest", "auth_token"])
+    user = User.includes(:user_skill_votes, :user_skills => [:skill => [ :user_skill_votes]] ).find(params[:id])
+    render json: user.as_json(
+      :include => [
+        :user_skill_votes, 
+        { 
+          :user_skills => {
+            :include => {
+              :skill => { 
+                :include => [ :user_skill_votes ] 
+              } 
+            }, 
+            :methods => [ 
+              :voter_list, 
+              :skill_vote_count, 
+              :skill_description 
+              ]
+            } 
+          }
+        ], 
+        :except => ["password_digest", "auth_token"]
+      )
   end
 
   # POST /users
