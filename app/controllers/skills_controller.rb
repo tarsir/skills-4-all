@@ -15,7 +15,10 @@ class SkillsController < ApiController
 
   # POST /skills
   def create
-    @skill = Skill.new(skill_params)
+    @skill = Skill.find_by(description: skill_params[:description])
+    unless @skill
+      @skill = Skill.new(skill_params)
+    end
 
     if @skill.save
       add_to_user
