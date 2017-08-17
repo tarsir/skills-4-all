@@ -8,10 +8,10 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #add8e6;
+  height: 100px;
   padding: 20px;
-  color: white;
+  color: #000;
 }
 
 .App-intro {
@@ -27,8 +27,18 @@
 
 .container {
   max-width: 1080px;
-  margin: 0 auto;
+  margin: 24px auto 0;
   font-size: 22px;
+}
+
+/* navigation */
+ul.navbar > .title {
+  float: left;
+}
+
+ul.navbar > li {
+  display: inline-block;
+  margin-left: 60px;
 }
 
 /* lists */

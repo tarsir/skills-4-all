@@ -101,15 +101,19 @@ class UserForm extends React.Component {
         }
 
         return (
-            <form className="user-edit-form" onSubmit={this.handleSubmit}>
-                <h2>{headerText}</h2>
-                <FormInput labelText="First name" value={this.state.firstName} changeHandler={this.handleFNameChange} />
-                <FormInput labelText="Last name" value={this.state.lastName} changeHandler={this.handleLNameChange} />
-                <FormInput labelText="Email address" value={this.state.email} changeHandler={this.handleEmailChange} />
-                <FormPassword labelText="Password" value={this.state.password} changeHandler={this.handlePasswordChange} />
-                <FormPassword labelText="Password confirmation" value={this.state.password_confirmation} changeHandler={this.handlePasswordConfirmChange} />
-                <input type="submit" value="Submit" />
-            </form>
+            <fieldset>
+                <legend>{headerText}</legend>
+                <form onSubmit={this.handleSubmit}>
+                    <FormInput labelText="First name" value={this.state.firstName} changeHandler={this.handleFNameChange} />
+                    <FormInput labelText="Last name" value={this.state.lastName} changeHandler={this.handleLNameChange} />
+                    <FormInput labelText="Email address" value={this.state.email} changeHandler={this.handleEmailChange} />
+                    <FormPassword labelText="Password" value={this.state.password} changeHandler={this.handlePasswordChange} />
+                    <FormPassword labelText="Password confirmation" value={this.state.password_confirmation} changeHandler={this.handlePasswordConfirmChange} />
+                    <div className="form-item">
+                        <input type="submit" className="button" value="Submit" />
+                    </div>
+                </form>
+            </fieldset>
         )
     }
 }

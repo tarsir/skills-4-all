@@ -1,4 +1,5 @@
 class UsersController < ApiController
+  skip_before_action :require_login!, only: [:create]
   before_action :set_user, only: [:update, :destroy]
 
   # GET /users
