@@ -1,3 +1,5 @@
+import {getUserById} from './user_api';
+
 const AUTH_TOKEN_KEY = 'authentication';
 const USER_ID_KEY = 'userId';
 
@@ -23,6 +25,13 @@ function getUserId() {
     return sessionStorage.getItem(USER_ID_KEY);
 }
 
+function getCurrentUser() {
+    let currentId = getUserId();
+    if (currentId) {
+        return getUserById(currentId);
+    }
+}
+
 function buildHeaders() {
     return {
         'Content-Type' : 'application/json',
@@ -36,5 +45,6 @@ export {
     buildHeaders,
     saveAuthToken,
     getUserId,
-    clearAuth
+    clearAuth,
+    getCurrentUser
 };
