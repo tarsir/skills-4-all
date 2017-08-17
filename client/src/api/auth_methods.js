@@ -27,9 +27,7 @@ function getUserId() {
 
 function getCurrentUser() {
     let currentId = getUserId();
-    if (currentId) {
-        return getUserById(currentId);
-    }
+    return getUserById(currentId);
 }
 
 function buildHeaders() {
