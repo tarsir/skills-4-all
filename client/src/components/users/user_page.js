@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import NewSkillSection from './skill_form';
+import RelatedUserSection from './related_users';
 
 import { getUserById } from '../../api/user_api';
 import { addVote, removeVote } from '../../api/skill_api';
@@ -29,6 +30,12 @@ function VotedBadge(props) {
 function NotVotedBadge(props) {
     return (
         <div onClick={props.clickHandler} className="vote-count-badge no-vote">{props.count}</div>
+    );
+}
+
+function UserSkillsHeader(props) {
+    return (
+        <h4>User Skills</h4>
     );
 }
 
@@ -133,6 +140,7 @@ class UserSkillSection extends React.Component {
 
         return (
             <div className="user-skill-container shadow-section box-section">
+                <UserSkillsHeader />
                 <ul className="user-skill-list">
                     {userSkillList}
                     <NewSkillSection userId={this.props.userId} 
@@ -155,8 +163,8 @@ UserSkillSection.propTypes = {
 function UserInfo(props) {
     return (
         <div className="user-info shadow-section box-section">
-            <h2>User Info</h2>
-            <h4>Email: {props.user.email}</h4>
+            <h4>User Info</h4>
+            <span>Email: {props.user.email}</span>
         </div>
     )
 }
@@ -190,10 +198,11 @@ export default class UserPage extends React.Component {
     }
 
     render() {
-        let userInfo = null, userSkills = null, userPageHeader = null;
+        let userInfo = null, userSkills = null, userPageHeader = null, relatedUsers = null;
         if (this.state.userData) {
             userPageHeader = <UserPageHeader user={this.state.userData} />;
             userInfo = <UserInfo user={this.state.userData} />;
+            relatedUsers = <RelatedUserSection users={this.state.userData.skill_related_users} />;
 
             if (this.state.userData.user_skills) {
                 userSkills = <UserSkillSection userSkills={this.state.userData.user_skills} userId={this.state.userData.id} />;
@@ -205,6 +214,7 @@ export default class UserPage extends React.Component {
                 {userPageHeader}
                 {userInfo}
                 {userSkills}
+                {relatedUsers}
             </div>
         );
     }
