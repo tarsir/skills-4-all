@@ -6,7 +6,12 @@
 .user-skill-container {
     display: inline-block;
     padding: 20px;
-    width: 50%;
+    width: 30%;
+}
+
+.related-user-section {
+    width: 30%;
+    float: right;
 }
 
 .box-section {

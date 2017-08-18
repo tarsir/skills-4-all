@@ -35,4 +35,16 @@ class User < ApplicationRecord
     self.authenticate(password)
   end
 
+  def skill_related_users
+    related_users = []
+    for s in self.user_skills do
+      other_users = UserSkill.includes(:user).where.not(user_id: self.id).where(skill_id: s.skill_id).all
+      for u in other_users do
+        user = u.user
+        related_users.push(Hash["name" => user.first_name + " " + user.last_name, "id" => user.id])
+      end
+    end
+    related_users.uniq { |user| user["id"]}
+  end
+
 end
