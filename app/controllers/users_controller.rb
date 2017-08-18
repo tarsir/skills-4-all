@@ -17,11 +17,11 @@ class UsersController < ApiController
         :user_skill_votes, 
         { 
           :user_skills => {
-            :include => {
-              :skill => { 
+            :include => { 
+              :skill => {
                 :include => [ :user_skill_votes ] 
-              } 
-            }, 
+              }
+            },
             :methods => [ 
               :voter_list, 
               :skill_vote_count, 
@@ -30,6 +30,9 @@ class UsersController < ApiController
             } 
           }
         ], 
+        :methods => [
+          :skill_related_users
+        ],
         :except => ["password_digest", "auth_token"]
       )
   end
