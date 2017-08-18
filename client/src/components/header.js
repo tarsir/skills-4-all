@@ -30,7 +30,6 @@ export default class Header extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log(nextState);
         if (nextState.loadingData) {
             return false;
         }
