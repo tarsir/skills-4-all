@@ -27,7 +27,6 @@ class LoginForm extends React.Component {
         }).catch((error) => {
             console.log(error);
         }).then((respJson) => {
-            console.log(respJson);
             if (!respJson.error) {
                 saveAuthToken(respJson);
                 this.props.successHandler();

@@ -99,6 +99,7 @@ export default class Users extends React.Component {
                     <Route path="/users/edit/:id" render={(props) => {
                         return <UserFormWrapper {...props} />;
                     }} />
+                    <Route path="/users/null" component={UserList} />
                     <Route path="/users/:id" component={UserPage} />
                 </Switch>
             </div>

@@ -17,7 +17,8 @@ export default class Header extends Component {
 
         this.state = {
             currentUser: null,
-            isLoggedIn: false
+            isLoggedIn: false,
+            loadingData: false
         };
     }
 
@@ -28,16 +29,24 @@ export default class Header extends Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextState.loadingData) {
+            return false;
+        }
+        return true;
+    }
+
     componentDidUpdate(prevProps, prevState) {
-        if (!prevState.currentUser) {
+        if (isLoggedIn() && !prevState.isLoggedIn) {
+            this.setState({loadingData: true});
             getCurrentUser().then((response) => {
                 return response.json();
             }).then((respJson) => {
-                this.setState({currentUser: respJson});
+                this.setState({currentUser: respJson, isLoggedIn: true, loadingData: false});
             });
         }
-        else if (!isLoggedIn()) {
-            this.setState({currentUser: null});
+        else if (!isLoggedIn() && prevState.currentUser) {
+            this.setState({currentUser: null, isLoggedIn: false, loadingData: false});
         }
     }
 

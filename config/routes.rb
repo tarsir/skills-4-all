@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
-  post 'votes/add'
+  scope '/api' do
+    post "/login", to: "sessions#create"
+    post "/logout", to: "sessions#destroy"
 
-  post 'votes/remove'
+    post 'votes/add'
+    post 'votes/remove'
 
-  post "/login", to: "sessions#create"
-  post "/logout", to: "sessions#destroy"
+    resources :skills
+    resources :users
+    devise_for :admin_users, ActiveAdmin::Devise.config
+    ActiveAdmin.routes(self)
+    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  end
 
-  resources :skills
-  resources :users
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '*path', to: "application#fallback_index_html", constraints: -> (request) do
+    !request.xhr? && request.format.html?
+  end
 end
