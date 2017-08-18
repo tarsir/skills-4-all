@@ -20,11 +20,14 @@ function UserListHeader() {
 
 function UserListItem(props) {
     return (
-        <li className="user-list-item">
-            <Link to={{ pathname: '/users/' + props.user.id }}>
-                {props.user.first_name} {props.user.last_name} ({props.user.total_votes})
-            </Link>
-        </li>
+            <tr>
+                <td>
+                    <Link to={{ pathname: '/users/' + props.user.id }}> 
+                        {props.user.first_name} {props.user.last_name}
+                    </Link>
+                </td>
+                <td>{props.user.total_votes}</td>
+            </tr>
     );
 }
 
@@ -64,9 +67,17 @@ class UserList extends React.Component {
         return (
             <div>
                 <UserListHeader />
-                <ul className="user-list">
-                    {userList}
-                </ul>
+                <table className="bordered">
+                    <thead>
+                        <tr>
+                            <th className="text-center">User Name</th>
+                            <th className="text-center">Total Endorsements</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {userList}
+                    </tbody>
+                </table>
             </div>
         );
     }
