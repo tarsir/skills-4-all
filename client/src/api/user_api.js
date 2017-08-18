@@ -11,19 +11,19 @@ function logout() {
         headers
     };
 
-    let req = new Request('/logout', config);
+    let req = new Request('/api/logout', config);
 
     return window.fetch(req);
 }
 
 function getUsers() {
     let headers = buildHeaders();
-    return window.fetch('/users', {headers});
+    return window.fetch('/api/users', {headers});
 }
 
 function getUserById(userId) {
     let headers = buildHeaders();
-    return window.fetch('/users/' + userId, {headers});
+    return window.fetch('/api/users/' + userId, {headers});
 }
 
 function updateUser(userId, userData) {
@@ -37,7 +37,7 @@ function updateUser(userId, userData) {
         })
     };
 
-    let req = new Request('/users/' + userId, config);
+    let req = new Request('/api/users/' + userId, config);
 
     return window.fetch(req);
 }
@@ -53,7 +53,7 @@ function addNewUser(userData) {
         })
     };
 
-    let req = new Request('/users', config);
+    let req = new Request('/api/users', config);
 
     return window.fetch(req);
 }
@@ -71,7 +71,7 @@ function login(loginData) {
         }})
     };
 
-    let req = new Request('/login', config);
+    let req = new Request('/api/login', config);
 
     return window.fetch(req);
 }
