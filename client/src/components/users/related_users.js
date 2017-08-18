@@ -15,10 +15,15 @@ function RelatedUserItem(props) {
     )
 }
 
+RelatedUserItem.propTypes = {
+    userId: PropTypes.number,
+    userName: PropTypes.string
+}
+
 export default class RelatedUserSection extends React.Component {
     render() {
         let relatedUserList = this.props.users.map((user) => {
-            return <RelatedUserItem userId={user.id} userName={user.name} />;
+            return <RelatedUserItem key={user.id} userId={user.id} userName={user.name} />;
         });
 
         return (
@@ -30,4 +35,8 @@ export default class RelatedUserSection extends React.Component {
             </div>
         );
     }
+}
+
+RelatedUserSection.propTypes = {
+    users: PropTypes.array
 }
