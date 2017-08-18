@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect, Link} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 import { isLoggedIn, getCurrentUser } from '../api/auth_methods';
-import logo from '../logo.svg';
 
 function UserGreeting(props) {
     return (
