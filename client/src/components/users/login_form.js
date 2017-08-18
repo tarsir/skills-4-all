@@ -1,15 +1,11 @@
 import React from 'react';
 
-import { Switch, Route, Redirect} from 'react-router-dom';
+import { Switch, Redirect} from 'react-router-dom';
 
 import { login } from '../../api/user_api';
 import { saveAuthToken } from '../../api/auth_methods';
 
 import { FormInput, FormPassword } from '../form/inputs';
-
-function LoginHeader(props) {
-    return <h2>Login</h2>;
-}
 
 class LoginForm extends React.Component {
     constructor(props) {
