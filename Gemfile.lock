@@ -216,7 +216,7 @@ DEPENDENCIES
   devise (> 4.x)
   inherited_resources!
   listen (~> 3.0.5)
-  pg (~> 0.20.0)
+  pg (= 0.20.0)
   puma (~> 3.7)
   rails (~> 5.1.2)
   spring
