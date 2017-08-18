@@ -6,7 +6,7 @@ class UsersController < ApiController
   def index
     @users = User.all
 
-    render json: @users.as_json(except: ["password_digest", "auth_token", "created_at", "updated_at"])
+    render json: @users.as_json(methods: [:total_votes], except: ["password_digest", "auth_token", "created_at", "updated_at"])
   end
 
   # GET /users/1

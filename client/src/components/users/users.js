@@ -8,6 +8,10 @@ import UserFormWrapper from './user_form';
 import { getUsers } from '../../api/user_api';
 import '../../assets/lists.css';
 
+function userCompareByVotes(a, b) {
+    return b.total_votes - a.total_votes;
+}
+
 function UserListHeader() {
     return (
         <h2>Users</h2>
@@ -17,7 +21,9 @@ function UserListHeader() {
 function UserListItem(props) {
     return (
         <li className="user-list-item">
-            <Link to={{ pathname: '/users/' + props.user.id }}>{props.user.first_name} {props.user.last_name}</Link>
+            <Link to={{ pathname: '/users/' + props.user.id }}>
+                {props.user.first_name} {props.user.last_name} ({props.user.total_votes})
+            </Link>
         </li>
     );
 }
@@ -44,6 +50,7 @@ class UserList extends React.Component {
         getUsers().then((response) => {
             return response.json();
         }).then((respJson) => {
+            respJson.sort(userCompareByVotes);
             this.setState({users: respJson});
         });
     }
