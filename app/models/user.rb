@@ -47,4 +47,8 @@ class User < ApplicationRecord
     related_users.uniq { |user| user["id"]}
   end
 
+  def total_votes
+    UserSkillVote.where(receiver: self.id).count
+  end
+
 end
